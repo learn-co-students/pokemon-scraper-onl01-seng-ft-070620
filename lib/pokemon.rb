@@ -10,14 +10,13 @@ class Pokemon
     end
 
     def self.save (name, type, db)
-        # binding.pry
         sql = "INSERT INTO pokemon (name, type) VALUES (?, ?)"
-
-        @db.execute(sql, [name, type])
+        db.execute(sql, [name, type])
     end
 
-    def find 
-
+    def self.find (id,db)
+        sql = "SELECT * FROM pokemon WHERE id = ? LIMIT 1"
+        row = db.execute(sql, id).flatten
+        Pokemon.new(id:row[0], name:row[1], type:row[2], db: db)
     end
-
 end
