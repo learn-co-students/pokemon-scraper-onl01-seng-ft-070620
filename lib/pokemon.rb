@@ -2,7 +2,6 @@ require 'pry'
 class Pokemon
 
     attr_accessor :name, :type, :db, :id
-    # attr_reader :id
 
     def initialize (attributes)
         attributes.each{|key, value| self.send(("#{key}="),value)}
@@ -22,7 +21,7 @@ class Pokemon
         attributes = {:id => row[0], :name => row[1], :type => row[2]}
         new_pokemon = self.new(attributes)
     end
-
+    
     def self.find(id, db)
         @db = db
         sql = <<-SQL
